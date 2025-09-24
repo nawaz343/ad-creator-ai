@@ -1,0 +1,12 @@
+torch>=1.13.0
+diffusers>=0.21.0
+transformers>=4.25.0
+accelerate
+safetensors
+Pillow>=9.0.0
+opencv-python>=4.7.0
+gradio>=3.28.0
+requests
+scikit-learn
+lpips
+torchmetrics
