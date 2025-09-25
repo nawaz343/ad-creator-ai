@@ -16,7 +16,7 @@ def main():
         gr.Markdown("# 🖼️ AI-Powered Advertisement Creator")
 
         with gr.Row():
-            product = gr.Textbox(label="Product/Service Name", placeholder="e.g., Qafila Tours Dubai Package")
+            product = gr.Textbox(label="Product/Service Name", placeholder="e.g., ABC Tours and Travels")
             style = gr.Dropdown(["professional", "minimalist", "luxury", "vibrant"], label="Style", value="professional")
             platform = gr.Dropdown(["instagram_square","instagram_story","facebook_ad"], label="Platform")
 
