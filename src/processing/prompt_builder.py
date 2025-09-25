@@ -1,21 +1,40 @@
-PROMPT_TEMPLATES = {
-    "product_showcase": {
-        "base": "professional product photography of {product}, {style}, {background}",
-        "styles": ["minimalist", "luxury", "vibrant", "natural"],
-        "backgrounds": ["white background", "lifestyle setting", "gradient backdrop"]
-    },
-    "lifestyle": {
-        "base": "lifestyle photo of {product}, {mood}, {setting}, cinematic lighting",
-        "moods": ["happy", "serene", "energetic", "cozy"],
-        "settings": ["modern home", "outdoor scene", "office"]
-    },
-    "emotional": {
-        "base": "{emotion} advertisement for {product}, {color_scheme}, {composition}",
-        "emotions": ["joy", "comfort", "excitement", "trust"],
-        "color_schemes": ["warm tones", "cool palette", "monochrome"],
-        "compositions": ["centered", "rule of thirds", "dynamic angle"]
-    }
-}
+NEGATIVE_PROMPTS = [
+    "blurry", "low quality", "distorted", "text overlay", "watermark", "pixelated"
+]
+
+class PromptBuilder:
+    def __init__(self):
+        pass  # no predefined categories needed
+
+    def auto_detect_category(self, product_name: str):
+        name = product_name.lower()
+        if any(word in name for word in ["tour", "travel", "holiday", "flight", "visa", "package"]):
+            return "travel"
+        elif any(word in name for word in ["restaurant", "food", "drink", "coffee", "kitchen"]):
+            return "food"
+        elif any(word in name for word in ["clothing", "fashion", "shoe", "apparel", "style"]):
+            return "fashion"
+        elif any(word in name for word in ["software", "service", "consulting", "agency", "training"]):
+            return "services"
+        else:
+            return "generic"
+
+    def build_prompt(self, product_name: str):
+        category = self.auto_detect_category(product_name)
+
+        if category == "travel":
+            prompt = f"Advertisement poster for {product_name}, travel agency style, famous landmarks, vibrant colors, text placeholder for offers, digital artwork"
+        elif category == "food":
+            prompt = f"Food and beverage promotional ad for {product_name}, modern design, appetizing visuals, marketing poster style, space for slogan"
+        elif category == "fashion":
+            prompt = f"Fashion advertisement for {product_name}, bold typography, urban background, stylish layout, high quality ad poster"
+        elif category == "services":
+            prompt = f"Professional services promotional banner for {product_name}, clean corporate style, modern design, marketing flyer layout"
+        else:  # generic fallback
+            prompt = f"Advertisement poster for {product_name}, modern marketing style, bold design, text space, digital artwork"
+
+        return prompt + ", high resolution, graphic design, sharp focus"
+
 
 NEGATIVE_PROMPTS = [
     "blurry", "low quality", "distorted", "text overlay", "watermark"
